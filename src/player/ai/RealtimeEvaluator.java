@@ -4,6 +4,7 @@ import game.BoardHelper;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 import static game.BoardHelper.getAllPossibleMoves;
 
@@ -11,7 +12,9 @@ public class RealtimeEvaluator implements Evaluator {
 
     //public static final int WEIGHT_SET_SIZE = 6;
     int[][] weightSetForDiscCount;
-
+    public static ArrayList<ArrayList<Integer>> moveCounts = new ArrayList<ArrayList<Integer>>(2);
+   
+ 
     public int eval(int[][] board , int player){
         int score = 0;
 
@@ -41,7 +44,13 @@ public class RealtimeEvaluator implements Evaluator {
 
 
     public RealtimeEvaluator(int[][] weightSet , int[] timingSet){
+
+   
         weightSetForDiscCount = new int[65][weightSet[0].length];
+        
+        moveCounts.add(new ArrayList<Integer>());
+        moveCounts.add(new ArrayList<Integer>());
+ 
 
         //dc : Disk Count
         for(int dc = 0; dc <= 64; dc++) {
@@ -67,6 +76,7 @@ public class RealtimeEvaluator implements Evaluator {
                 weightSetForDiscCount[dc][i] = (int)Math.rint(factor * weightSet[w][i] + (1 - factor) * weightSet[w - 1][i]);
             }
         }
+    
     }
 
     public static int pieces(int[][] board , int player){
@@ -123,11 +133,44 @@ public class RealtimeEvaluator implements Evaluator {
         return 100 * (myS - opS) / (myS + opS + 1);
     }
 
+    public static void writeMobility(int[][] board){
+        System.out.println("HERE I AM");
+        ArrayList<Integer> listMyPlayer= new ArrayList<Integer>();
+        ArrayList<Integer> listOpPlayer = new ArrayList<Integer>();
+        listMyPlayer = moveCounts.get(0);
+        System.out.println(listMyPlayer.toString());
+        listOpPlayer = moveCounts.get(1);
+        System.out.println(listOpPlayer.toString());
+
+        listMyPlayer.add(getAllPossibleMoves(board,0).size());
+        listOpPlayer.add(getAllPossibleMoves(board,1).size());
+        
+        moveCounts.set(0,listMyPlayer);
+        moveCounts.set(1,listOpPlayer);
+
+
+    }
+
     public static int mobility(int[][] board , int player){
         int oplayer = (player==1) ? 2 : 1;
 
         int myMoveCount = getAllPossibleMoves(board,player).size();
         int opMoveCount = getAllPossibleMoves(board,oplayer).size();
+        
+        //ArrayList<Integer> listMyPlayer= new ArrayList<Integer>();
+        //ArrayList<Integer> listOpPlayer = new ArrayList<Integer>();
+
+        //listMyPlayer = moveCounts.get(player-1);
+        //System.out.println(listMyPlayer.toString());
+        //listOpPlayer = moveCounts.get(oplayer-1);
+        //System.out.println(listOpPlayer.toString());
+
+        //listMyPlayer.add(getAllPossibleMoves(board,player).size());
+        //listOpPlayer.add(getAllPossibleMoves(board,oplayer).size());
+        
+        //moveCounts.set(player-1,listMyPlayer);
+        //moveCounts.set(oplayer-1,listOpPlayer);
+
 
         return 100 * (myMoveCount - opMoveCount) / (myMoveCount + opMoveCount + 1);
     }

@@ -34,7 +34,7 @@ public class DynamicEvaluator implements Evaluator {
             case MID_GAME:
                 return 1000*evalCorner(board,player) + 20*evalMobility(board,player) + 10*evalDiscDiff(board, player) + 100*evalParity(board);
             case LATE_GAME:
-            default:
+                default:
                 return 1000*evalCorner(board,player) + 100*evalMobility(board,player) + 500*evalDiscDiff(board, player) + 500*evalParity(board);
         }
     }

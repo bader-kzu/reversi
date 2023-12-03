@@ -2,6 +2,7 @@ package game;
 
 import player.*;
 import player.ai.*;
+import player.ai.RealtimeEvaluator;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,7 +30,8 @@ public class GamePanel extends JPanel implements GameEngine {
 
 
     GamePlayer player1 = new AIPlayerRealtimeKiller(1,6,true);
-    GamePlayer player2 = new AIPlayerDynamic(2,6);
+   // GamePlayer player2 = new AIPlayerDynamic(2,6);
+    GamePlayer player2 = new GreedyPlayer(2);
 
     Timer player1HandlerTimer;
     Timer player2HandlerTimer;
@@ -90,6 +92,7 @@ public class GamePanel extends JPanel implements GameEngine {
         //
         updateBoardInfo();
         updateTotalScore();
+        
 
         //AI Handler Timer (to unfreeze gui)
         player1HandlerTimer = new Timer(1000,(ActionEvent e) -> {
@@ -112,6 +115,7 @@ public class GamePanel extends JPanel implements GameEngine {
     public void manageTurn(){
         if(BoardHelper.hasAnyMoves(board,1) || BoardHelper.hasAnyMoves(board,2)) {
             updateBoardInfo();
+            RealtimeEvaluator.writeMobility(board);
             if (turn == 1) {
                 if(BoardHelper.hasAnyMoves(board,1)) {
                     if (player1.isUserPlayer()) {
