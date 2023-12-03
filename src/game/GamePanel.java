@@ -2,7 +2,6 @@ package game;
 
 import player.*;
 import player.ai.*;
-import player.ai.RealtimeEvaluator;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,8 +29,10 @@ public class GamePanel extends JPanel implements GameEngine {
 
 
     GamePlayer player1 = new AIPlayerRealtimeKiller(1,6,true);
-   // GamePlayer player2 = new AIPlayerDynamic(2,6);
-    GamePlayer player2 = new GreedyPlayer(2);
+    //GamePlayer player1 = new AIPlayerDynamic(2,6);
+    GamePlayer player2 = new AIPlayerDynamic(2,6);
+    //GamePlayer player2 = new AIPlayerRealtimeKiller(1,6,false);
+
 
     Timer player1HandlerTimer;
     Timer player2HandlerTimer;
@@ -149,6 +150,7 @@ public class GamePanel extends JPanel implements GameEngine {
             //game finished
             System.out.println("Game Finished !");
             int winner = BoardHelper.getWinner(board);
+            System.out.println(winner);
             if(winner==1) totalscore1++;
             else if(winner==2) totalscore2++;
             updateTotalScore();

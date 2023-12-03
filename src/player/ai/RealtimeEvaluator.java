@@ -5,6 +5,7 @@ import game.BoardHelper;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.lang.Math.*;
 
 import static game.BoardHelper.getAllPossibleMoves;
 
@@ -39,8 +40,11 @@ public class RealtimeEvaluator implements Evaluator {
             score += weights[5] * cornerGrab(board,player);
         }
 
-        return score;
-    }
+        //return score;
+        //return Math.min(cornerGrab(board,player),placement(board,player));
+        return placement(board,player) + mobility(board,player) + frontier(board,player);
+        //return  mobility(board,player) + frontier(board,player);
+   }
 
 
     public RealtimeEvaluator(int[][] weightSet , int[] timingSet){
@@ -134,16 +138,16 @@ public class RealtimeEvaluator implements Evaluator {
     }
 
     public static void writeMobility(int[][] board){
-        System.out.println("HERE I AM");
+
         ArrayList<Integer> listMyPlayer= new ArrayList<Integer>();
         ArrayList<Integer> listOpPlayer = new ArrayList<Integer>();
         listMyPlayer = moveCounts.get(0);
-        System.out.println(listMyPlayer.toString());
+        System.out.println("Player 1:"+listMyPlayer.toString());
         listOpPlayer = moveCounts.get(1);
-        System.out.println(listOpPlayer.toString());
+        System.out.println("Player 2:"+listOpPlayer.toString());
 
-        listMyPlayer.add(getAllPossibleMoves(board,0).size());
-        listOpPlayer.add(getAllPossibleMoves(board,1).size());
+        listMyPlayer.add(getAllPossibleMoves(board,1).size());
+        listOpPlayer.add(getAllPossibleMoves(board,2).size());
         
         moveCounts.set(0,listMyPlayer);
         moveCounts.set(1,listOpPlayer);
