@@ -142,9 +142,9 @@ public class RealtimeEvaluator implements Evaluator {
         ArrayList<Integer> listMyPlayer= new ArrayList<Integer>();
         ArrayList<Integer> listOpPlayer = new ArrayList<Integer>();
         listMyPlayer = moveCounts.get(0);
-        System.out.println("Player 1:"+listMyPlayer.toString());
+        System.out.println("Mobility Player 1:"+listMyPlayer.toString());
         listOpPlayer = moveCounts.get(1);
-        System.out.println("Player 2:"+listOpPlayer.toString());
+        System.out.println("Mobility Player 2:"+listOpPlayer.toString());
 
         listMyPlayer.add(getAllPossibleMoves(board,1).size());
         listOpPlayer.add(getAllPossibleMoves(board,2).size());
