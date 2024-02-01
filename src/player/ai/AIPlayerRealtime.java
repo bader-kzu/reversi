@@ -14,7 +14,7 @@ public class AIPlayerRealtime extends GamePlayer {
         searchDepth = depth;
 
         if(mark==1) {
-            evaluator = new RealtimeEvaluator(new int[][] {
+            evaluator = new RealtimeEvaluator_initial(new int[][] {
                     {8, 85, -40, 10, 210, 520},
                     {8, 85, -40, 10, 210, 520},
                     {33, -50, -15, 4, 416, 2153},
@@ -27,7 +27,7 @@ public class AIPlayerRealtime extends GamePlayer {
                     {8, 500, 77, 0, 36, 299}},
                     new int[] {0, 55, 56, 57, 58, 59, 60, 61, 62, 63});
         }else{
-            evaluator = new RealtimeEvaluator(new int[][] {
+            evaluator = new RealtimeEvaluator_initial(new int[][] {
                     {8, 85, -40, 10, 210, 520},
                     {8, 85, -40, 10, 210, 520},
                     {33, -50, -15, 4, 416, 2153},

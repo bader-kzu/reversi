@@ -12,7 +12,7 @@ public class AIPlayerDynamic extends GamePlayer {
     public AIPlayerDynamic(int mark, int depth) {
         super(mark);
         searchDepth = depth;
-        evaluator = new DynamicEvaluator();
+        evaluator = new DynamicEvaluator_initial();
     }
 
     @Override

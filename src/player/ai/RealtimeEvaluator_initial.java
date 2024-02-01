@@ -7,9 +7,9 @@ import java.util.ArrayList;
 
 import static game.BoardHelper.getAllPossibleMoves;
 
-public class RealtimeEvaluator implements Evaluator {
+public class RealtimeEvaluator_initial implements Evaluator {
 
-     //public static final int WEIGHT_SET_SIZE = 6;
+    //public static final int WEIGHT_SET_SIZE = 6;
     int[][] weightSetForDiscCount;
 
     public int eval(int[][] board , int player){
@@ -36,11 +36,11 @@ public class RealtimeEvaluator implements Evaluator {
             score += weights[5] * cornerGrab(board,player);
         }
 
-        return 50*mobility(board, player) + 70*cornerGrab(board, player) + 20*stability(board, player) + 20*placement(board, player);
+        return score;
     }
 
 
-    public RealtimeEvaluator(int[][] weightSet , int[] timingSet){
+    public RealtimeEvaluator_initial(int[][] weightSet , int[] timingSet){
         weightSetForDiscCount = new int[65][weightSet[0].length];
 
         //dc : Disk Count
@@ -79,14 +79,14 @@ public class RealtimeEvaluator implements Evaluator {
     }
 
     static int[][] SQUARE_SCORE = {
-            {100 , -20, 8  ,  6 ,  6 , 8  , -20 ,  100},
-            {-20 , -50 ,  -4, -4 , -4 , -4 , -50 , -20 },
+            {100 , -10 , 8  ,  6 ,  6 , 8  , -10 ,  100},
+            {-10 , -25 ,  -4, -4 , -4 , -4 , -25 , -10 },
             {8   ,  -4 ,   6,   4,   4,   6,  -4 ,  8  },
             {6   ,  -4 ,   4,   0,   0,   4,  -4 ,  6  },
             {6   ,  -4 ,   4,   0,   0,   4,  -4 ,  6  },
             {8   ,  -4 ,   6,   4,   4,   6,  -4 ,  8  },
-            {-20 , -50 ,  -4, -4 , -4 , -4 , -50 , -20},
-            {100 , -20 , 8  ,  6 ,  6 , 8  , -20 ,  100}};
+            {-10 , -25 ,  -4, -4 , -4 , -4 , -25 , -10 },
+            {100 , -10 , 8  ,  6 ,  6 , 8  , -10 ,  100}};
 
     public static int placement(int[][] board , int player){
         int oplayer = (player==1) ? 2 : 1;
@@ -154,4 +154,5 @@ public class RealtimeEvaluator implements Evaluator {
 
         return 0;
     }
+
 }
