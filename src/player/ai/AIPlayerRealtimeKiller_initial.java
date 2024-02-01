@@ -6,7 +6,7 @@ import game.GamePlayer;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class AIPlayerRealtimeKiller extends GamePlayer {
+public class AIPlayerRealtimeKiller_initial extends GamePlayer {
 
     private int searchDepth;
     private Evaluator evaluator;
@@ -19,7 +19,7 @@ public class AIPlayerRealtimeKiller extends GamePlayer {
     OpeningBook OB;
     private boolean isOpeningActive = true;
 
-    public AIPlayerRealtimeKiller(int mark, int depth, boolean firstplayer) {
+    public AIPlayerRealtimeKiller_initial(int mark, int depth, boolean firstplayer) {
         super(mark);
 
         //init OpeningBook
@@ -32,7 +32,7 @@ public class AIPlayerRealtimeKiller extends GamePlayer {
         isFirstPlayer = firstplayer;
 
         if(mark==1) {
-            evaluator = new RealtimeEvaluator(new int[][] {
+            evaluator = new RealtimeEvaluator_initial(new int[][] {
                     {8, 85, -40, 10, 210, 520},
                     {8, 85, -40, 10, 210, 520},
                     {33, -50, -15, 4, 416, 2153},
@@ -45,7 +45,7 @@ public class AIPlayerRealtimeKiller extends GamePlayer {
                     {8, 500, 77, 0, 36, 299}},
                     new int[] {0, 55, 56, 57, 58, 59, 60, 61, 62, 63});
         }else{
-            evaluator = new RealtimeEvaluator(new int[][] {
+            evaluator = new RealtimeEvaluator_initial(new int[][] {
                     {8, 85, -40, 10, 210, 520},
                     {8, 85, -40, 10, 210, 520},
                     {33, -50, -15, 4, 416, 2153},

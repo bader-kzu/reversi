@@ -4,15 +4,15 @@ import game.GamePlayer;
 
 import java.awt.*;
 
-public class AIPlayerDynamic extends GamePlayer {
+public class AIPlayerDynamic_initial extends GamePlayer {
 
     private int searchDepth;
     private Evaluator evaluator;
 
-    public AIPlayerDynamic(int mark, int depth) {
+    public AIPlayerDynamic_initial(int mark, int depth) {
         super(mark);
         searchDepth = depth;
-        evaluator = new DynamicEvaluator();
+        evaluator = new DynamicEvaluator_initial();
     }
 
     @Override
